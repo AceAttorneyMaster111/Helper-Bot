@@ -35,6 +35,12 @@ async def on_message(message):
 	        return await client.send_message(message.channel, "Message disabled.")
     if enabled and ("toasty" in lowercase or "bot" in lowercase) and ("down" in lowercase or "not working" in lowercase or "dead" in lowercase or "offline" in lowercase) and message.author != client.user and message.channel.id == "303203727362490368":
         await client.send_message(message.channel, message.author.mention + ", " + message)
+        return await throttle()
+async def throttle(time=300):
+	global enabled
+	enabled = False
+	await asyncio.sleep(time)
+	enabled = True
 while True:
     try:
         client.loop.run_until_complete(client.start("Bot Token"))
