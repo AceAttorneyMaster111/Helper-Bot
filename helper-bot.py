@@ -16,6 +16,16 @@ async def on_message(message):
     global message
     lowercase = message.content.lower()
     if discord.utils.find(lambda r: r.name == "Helpers", message.server.roles) in message.author.roles or message.author.server_permissions.administrator or message.channel.id == "208674478773895168":
+    	if lowercase == "%help":
+    		return await client.send_message(message.channel, """When I think a user is saying that Toasty is down, I respond with a message letting them know that an admin can fix the problem when one arrives.
+
+My other commands (only accessible to helpers and admins):
+%help: Print this help message
+%message: Change my message to users
+%disable: Disable my main function
+%enable: Enable my main function
+
+Also, after my message is sent, I am by default disabled for five minutes.""")
     	if lowercase == "%message":
             await client.send_message(message.channel, message.author.mention + ", what should I change my message to? (type `cancel` to cancel or `reset` to reset to the standard message.")
             m = await client.wait_for_message(channel=message.channel, author=message.author)
